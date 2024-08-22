@@ -1,6 +1,13 @@
 # Gin builder
 
-**Usage**
+## Package
+- `apierror`: Define `APIError` struct that handle by `error_handler` middleware
+- `gormfilter`: Auto build gorm query base on gin request param
+- `pagination`: Auto paging gorm query
+- `handlerbuilder`: Build CURD api base on gorm model
+
+
+## Usage
 
 ```go
 package tests
