@@ -15,10 +15,10 @@ type ResponseOK struct {
 }
 
 type ResponseOKWithPagination struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-	//Total   int64       `json:"total"` // TODO: refactor it
-	Data interface{} `json:"data"`
+	Code    string      `json:"code"`
+	Message string      `json:"message"`
+	Total   *int64      `json:"total"`
+	Data    interface{} `json:"data"`
 }
 
 func Ok(c *gin.Context, data any) {
@@ -34,7 +34,7 @@ func OkWithPagination(c *gin.Context, page *pagination.Page) {
 		Code:    "Success",
 		Message: "Success",
 		Data:    page.Items,
-		//Total:   page.Total,
+		Total:   page.Total,
 	})
 }
 

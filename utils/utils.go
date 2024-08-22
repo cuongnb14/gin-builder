@@ -6,7 +6,7 @@ import (
 	"github.com/jinzhu/copier"
 )
 
-func Translate[T any](from any) *T {
+func Convert[T any](from any) *T {
 	var t T
 	err := copier.Copy(&t, from)
 	if err != nil {
@@ -15,7 +15,7 @@ func Translate[T any](from any) *T {
 	return &t
 }
 
-func TranslateList[F any, T any](from *[]F) *[]T {
+func ConvertList[F any, T any](from *[]F) *[]T {
 	if from == nil {
 		return nil
 	}

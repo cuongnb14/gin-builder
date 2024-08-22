@@ -15,7 +15,7 @@ import (
 
 type GFOperater string
 
-var (
+const (
 	GFEq  GFOperater = "="
 	GFGt  GFOperater = ">"
 	GFGte GFOperater = ">="
