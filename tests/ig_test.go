@@ -13,18 +13,21 @@ import (
 	"testing"
 )
 
+/*
+Url filter like: /users?min_age=10&email=user@example.com
+*/
 func NewUserFilter() *gormfilter.FilterBuilder {
 	filterBuilder := &gormfilter.FilterBuilder{}
 	filterBuilder.
 		AddFilter(gormfilter.Filter[string]{
 			Param: "min_age",
 			Field: "age",
-			Op:    gormfilter.GFGte,
+			Op:    gormfilter.Gte,
 		}).
 		AddFilter(gormfilter.Filter[string]{
 			Param: "email",
 			Field: "email",
-			Op:    gormfilter.GFEq,
+			Op:    gormfilter.Eq,
 		}).
 		SetOrdering([]string{"age", "name"})
 	return filterBuilder
@@ -44,7 +47,7 @@ func Test_HandlerBuilder(t *testing.T) {
 
 	router := gin.Default()
 
-	userHandlerBuilder := handlerbuilder.APIBuilder[User, UserVO]{
+	userHandlerBuilder := handlerbuilder.HandlerBuilder[User, UserVO]{
 		FnGetQuery: func(c *gin.Context) *gorm.DB {
 			return db.Model(&User{})
 		},

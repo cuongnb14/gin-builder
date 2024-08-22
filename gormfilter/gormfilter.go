@@ -16,11 +16,11 @@ import (
 type GFOperater string
 
 const (
-	GFEq  GFOperater = "="
-	GFGt  GFOperater = ">"
-	GFGte GFOperater = ">="
-	GFLt  GFOperater = "<"
-	GFLte GFOperater = "<="
+	Eq  GFOperater = "="
+	Gt  GFOperater = ">"
+	Gte GFOperater = ">="
+	Lt  GFOperater = "<"
+	Lte GFOperater = "<="
 )
 
 type IFilter interface {

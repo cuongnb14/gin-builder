@@ -13,18 +13,18 @@ type FnGetQuery func(*gin.Context) *gorm.DB
 type FnMapModelToVO[M, S any] func(*gin.Context, M) (S, error)
 type FnHook func(*gin.Context) error
 
-type APIBuilder[M any, S any] struct {
+type HandlerBuilder[M any, S any] struct {
 	FnGetQuery    FnGetQuery
 	FilterBuilder *gormfilter.FilterBuilder
 	Pagination    *pagination.Pagination
 }
 
-func (b *APIBuilder[M, S]) SetFnGetQuery(fn FnGetQuery) *APIBuilder[M, S] {
+func (b *HandlerBuilder[M, S]) SetFnGetQuery(fn FnGetQuery) *HandlerBuilder[M, S] {
 	b.FnGetQuery = fn
 	return b
 }
 
-func (b *APIBuilder[M, S]) BuildListHandler() func(c *gin.Context) {
+func (b *HandlerBuilder[M, S]) BuildListHandler() func(c *gin.Context) {
 	return func(c *gin.Context) {
 		var m []M
 		query := b.FnGetQuery(c)
@@ -48,7 +48,7 @@ func (b *APIBuilder[M, S]) BuildListHandler() func(c *gin.Context) {
 	}
 }
 
-func (b *APIBuilder[M, S]) BuildRetrieveHandler() func(c *gin.Context) {
+func (b *HandlerBuilder[M, S]) BuildRetrieveHandler() func(c *gin.Context) {
 	return func(c *gin.Context) {
 		pk := c.Param("id")
 
