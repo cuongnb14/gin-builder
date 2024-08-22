@@ -13,8 +13,13 @@ type APIBuilder[M any, S any] struct {
 	FnGetQuery FnGetQuery
 }
 
-func (b *APIBuilder[M, S]) SetFnGetQuery(fn FnGetQuery) {
+func NewAPIBuilder[M any, S any]() *APIBuilder[M, S] {
+	return &APIBuilder[M, S]{}
+}
+
+func (b *APIBuilder[M, S]) SetFnGetQuery(fn FnGetQuery) *APIBuilder[M, S] {
 	b.FnGetQuery = fn
+	return b
 }
 
 func (b *APIBuilder[M, S]) BuildListHandler() func(c *gin.Context) {
