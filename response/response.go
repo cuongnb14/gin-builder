@@ -3,6 +3,8 @@ package response
 import (
 	"net/http"
 
+	"github.com/cuongnb14/gin-builder/apierror"
+	"github.com/cuongnb14/gin-builder/pagination"
 	"github.com/gin-gonic/gin"
 )
 
@@ -36,7 +38,7 @@ func OkWithPagination(c *gin.Context, page *pagination.Page) {
 	})
 }
 
-func AbortWithAPIError(ctx *gin.Context, err *validation.APIError) {
+func AbortWithAPIError(ctx *gin.Context, err *apierror.APIError) {
 	_ = ctx.Error(err).SetType(gin.ErrorTypePublic)
 	ctx.Abort()
 }
