@@ -32,7 +32,10 @@ func (b *HandlerBuilder[M, S]) BuildListHandler() func(c *gin.Context) {
 			query = b.FilterBuilder.SetQuery(query).SetRequest(c.Request).GetFilterQuery()
 		}
 		if b.Pagination != nil {
-			page := b.Pagination.With(query).Request(c.Request).Response(&m)
+			page, err := b.Pagination.With(query).Request(c.Request).Response(&m)
+			if err != nil {
+				response.AbortWithError(c, err)
+			}
 			pagination.ConvertItems[M, S](page)
 			response.OkWithPagination(c, page)
 			return
